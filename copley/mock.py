@@ -28,7 +28,9 @@ class TapDensity(RealTapDensity):
         if not self.lock:
             self.lock = asyncio.Lock()
         async with self.lock:  # lock releases on CancelledError
-            if command == self.PRINT_REPORT:
+            if self.hw.address == "NO_RESPONSE":
+                return None
+            elif command == self.PRINT_REPORT:
                 return 'hello world :)'
 
     def _parse(self, response):

@@ -23,3 +23,11 @@ def test_driver_cli(capsys):
     assert "bulk_density" in captured.out
     assert "tapped_density" in captured.out
     assert "null" not in captured.out
+
+@mock.patch('copley.TapDensity', TapDensity)
+def test_driver_cli_noresponse(capsys):
+    """Confirm the commandline interface works."""
+    command_line(["NO_RESPONSE"])
+    captured = capsys.readouterr()
+    assert "on" in captured.out
+    assert "tapped_density" not in captured.out
