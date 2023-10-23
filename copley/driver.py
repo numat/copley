@@ -37,6 +37,7 @@ class TapDensity:
     READ_SET_SPEED = "SS"
     READ_SERIAL_NUMBER = "SN"
     READ_FIRMWARE = "V"
+    RESET_TEST = "TRESET"
 
     def __init__(self, address, **kwargs):
         """Set up connection parameters, serial or IP address and port."""
@@ -66,6 +67,10 @@ class TapDensity:
         response = await self.query(self.PRINT_REPORT)
         return self._parse(response)
 
+    async def reset(self):
+        """Reset the Copley."""
+        await self.hw._write(self.RESET_TEST)
+
     def _parse(self, response: str) -> dict:
         """Parse a tapped density report. Data output format is ASCII."""
         if response is None:
@@ -78,26 +83,23 @@ class TapDensity:
                 elif "Calculation type" in line:
                     calc_type = split_line[1].strip()
                 elif "Set Speed" in line:
-                    try:
-                        set_speed = int(split_line[1].strip())
-                    except ValueError:
-                        set_speed = split_line[1].strip()
+                    set_speed = split_line[1].strip()
                 elif "Total Taps" in line:
                     total_taps = int(split_line[1].strip())
                 elif "Sample Weight, W" in line:
-                    sample_weight = float(split_line[1].strip())
+                    sample_weight = split_line[1].strip()
                 elif "Initial Volume" in line:
-                    init_volume = float(split_line[1].strip())
+                    init_volume = split_line[1].strip()
                 elif "Final Volume" in line:
-                    final_volume = float(split_line[1].strip())
+                    final_volume = split_line[1].strip()
                 elif "Bulk Density" in line:
-                    bulk_density = float(split_line[1].strip())
+                    bulk_density = split_line[1].strip()
                 elif "Tapped Density (g/mL)" in line:
-                    tapped_density = float(split_line[1].strip())
+                    tapped_density = split_line[1].strip()
                 elif "Hausner Ratio" in line:
-                    hausner_ratio = float(split_line[1].strip())
+                    hausner_ratio = split_line[1].strip()
                 elif "Compress. Index" in line:
-                    compress_index = float(split_line[1].strip())
+                    compress_index = split_line[1].strip()
             try:
                 return {
                     'serial_number': sn,
@@ -113,4 +115,4 @@ class TapDensity:
                     'compress_index': compress_index
                 }
             except Exception as e:
-                return {f'Could not parse: {e}'}
+                raise e
