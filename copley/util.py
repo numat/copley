@@ -134,7 +134,7 @@ class TcpClient(Client):
     async def _readlines(self, num_lines):
         """Read lines."""
         await self._handle_connection()
-        lines = []
+        lines: list[str] = []
         while len(lines) < num_lines:
             try:
                 line = await self.connection['reader'].readuntil(self.eol)
@@ -222,3 +222,6 @@ class SerialClient(Client):
 
     async def _handle_connection(self):
         self.open = True
+
+    async def _handle_communication(self):
+        pass
