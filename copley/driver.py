@@ -67,9 +67,7 @@ class TapDensity:
         return self._parse(response)
 
     def _parse(self, response: str) -> dict:
-        """Parse a tapped density report.
-        Data output format is ASCII.
-        """
+        """Parse a tapped density report. Data output format is ASCII."""
         if response is None:
             return {'on': False}
         else:
