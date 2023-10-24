@@ -13,6 +13,7 @@ setup(
     url='https://github.com/JavanW-W/copley',
     author='Javan Whitney-Warner',
     author_email='j.whitney-warner@numat-tech.com',
+    package_data={'copley': ['py.typed']},
     packages=['copley'],
     install_requires=['pyserial'],
     extras_require={
