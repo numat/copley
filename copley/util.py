@@ -3,6 +3,7 @@
 Distributed under the GNU General Public License v2
 Copyright (C) 2019 NuMat Technologies
 """
+from __future__ import annotations
 
 import asyncio
 import logging
