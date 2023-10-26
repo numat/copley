@@ -77,29 +77,29 @@ class TapDensity:
             return {'on': False}
         else:
             for line in response:
-                split_line = line.strip().split(':')
+                value = line.strip().split(':')[1].strip()
                 if "Serial number" in line:
-                    sn = int(split_line[1].strip())
+                    sn = int(value)
                 elif "Calculation type" in line:
-                    calc_type = split_line[1].strip()
+                    calc_type = value
                 elif "Set Speed" in line:
-                    set_speed = split_line[1].strip()
+                    set_speed = value
                 elif "Total Taps" in line:
-                    total_taps = int(split_line[1].strip())
+                    total_taps = int(value)
                 elif "Sample Weight, W" in line:
-                    sample_weight = split_line[1].strip()
+                    sample_weight = value
                 elif "Initial Volume" in line:
-                    init_volume = split_line[1].strip()
+                    init_volume = value
                 elif "Final Volume" in line:
-                    final_volume = split_line[1].strip()
+                    final_volume = value
                 elif "Bulk Density" in line:
-                    bulk_density = split_line[1].strip()
+                    bulk_density = value
                 elif "Tapped Density (g/mL)" in line:
-                    tapped_density = split_line[1].strip()
+                    tapped_density = value
                 elif "Hausner Ratio" in line:
-                    hausner_ratio = split_line[1].strip()
+                    hausner_ratio = value
                 elif "Compress. Index" in line:
-                    compress_index = split_line[1].strip()
+                    compress_index = value
             try:
                 return {
                     'serial_number': sn,
