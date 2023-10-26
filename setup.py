@@ -10,7 +10,7 @@ setup(
     description='Python driver for Copley Tapped Density Tester.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/JavanW-W/copley',
+    url='https://github.com/numat/copley',
     author='Javan Whitney-Warner',
     author_email='j.whitney-warner@numat-tech.com',
     package_data={'copley': ['py.typed']},
