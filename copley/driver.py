@@ -77,7 +77,8 @@ class TapDensity:
             return {'on': False}
         else:
             for line in response:
-                value = line.strip().split(':')[1].strip()
+                if ":" in line:
+                    value = line.strip().split(':')[1].strip()
                 if "Serial number" in line:
                     sn = int(value)
                 elif "Calculation type" in line:
